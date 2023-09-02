@@ -18,6 +18,8 @@ colorPiker.addEventListener("input", () => {
 let mouseDown = false;
 grid.onmousedown = () => (mouseDown = true);
 grid.onmouseup = () => (mouseDown = false);
+grid.ontouchstart = () => (mouseDown = true);
+grid.ontouchend = () => (mouseDown = false);
 
 escala.onclick = (e) => tamaño(e.target.value);
 escala.oninput = () => {
@@ -43,7 +45,7 @@ function tamaño(size) {
 }
 
 function colorSquare(e) {
-  if (e.type === "mouseover" || (e.type === "touchmove" && !mouseDown)) return;
+  if (e.type === "mouseover" && !mouseDown) return;
   this.style.backgroundColor = colorDefecto;
   eraser.addEventListener("click", () => {
     colorDefecto = "white";
